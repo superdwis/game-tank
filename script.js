@@ -178,13 +178,13 @@
         vx: (random() - .5) * 24 + Math.cos(tank.angle) * 22,
         vy: (random() - .5) * 24 + Math.sin(tank.angle) * 22,
         life: .12 + random() * .1,
-        color: "#ffe58b",
+        color: "#ffb5a5",
         size: 2
       });
     }
   }
 
-  function explode(x, y, color = "#f3ac5e", amount = 9) {
+  function explode(x, y, color = "#f27b65", amount = 9) {
     for (let i = 0; i < amount; i++) {
       const angle = random() * Math.PI * 2;
       const speed = 16 + random() * 55;
@@ -273,7 +273,7 @@
       bullet.life -= dt;
       let remove = bullet.life <= 0 || bullet.x < 5 || bullet.x > WIDTH - 5 || bullet.y < 5 || bullet.y > HEIGHT - 5;
       if (!remove && obstacles.some((wall) => circleRect(bullet.x, bullet.y, 2, wall))) {
-        explode(bullet.x, bullet.y, "#b4ad7b", 3);
+        explode(bullet.x, bullet.y, "#bd8582", 3);
         remove = true;
       }
 
@@ -296,7 +296,7 @@
         const target = enemies.find((enemy) => Math.hypot(bullet.x - enemy.x, bullet.y - enemy.y) < enemy.radius + 2);
         if (target) {
           target.health--;
-          explode(bullet.x, bullet.y, "#e5d486", 4);
+          explode(bullet.x, bullet.y, "#ffb4a1", 4);
           remove = true;
           if (target.health <= 0) {
             enemies = enemies.filter((enemy) => enemy !== target);
@@ -321,26 +321,26 @@
   }
 
   function drawBackground() {
-    ctx.fillStyle = "#293020";
+    ctx.fillStyle = "#281b1e";
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
-    ctx.fillStyle = "#2d3423";
+    ctx.fillStyle = "#302024";
     ctx.fillRect(8, 8, WIDTH - 16, HEIGHT - 16);
-    ctx.fillStyle = "#323926";
+    ctx.fillStyle = "#382428";
     ctx.fillRect(13, 13, WIDTH - 26, HEIGHT - 26);
 
     for (let x = 14; x < WIDTH - 12; x += 16) {
       for (let y = 14; y < HEIGHT - 12; y += 16) {
-        ctx.fillStyle = ((x / 16 + y / 16) % 2 === 0) ? "rgba(186,190,126,.025)" : "rgba(9,14,9,.055)";
+        ctx.fillStyle = ((x / 16 + y / 16) % 2 === 0) ? "rgba(214,157,150,.025)" : "rgba(12,7,9,.08)";
         ctx.fillRect(x, y, 15, 15);
       }
     }
-    ctx.strokeStyle = "rgba(195,202,134,.06)";
+    ctx.strokeStyle = "rgba(218,151,154,.08)";
     ctx.lineWidth = 1;
     ctx.setLineDash([3, 5]);
     ctx.strokeRect(21.5, 21.5, WIDTH - 43, HEIGHT - 43);
     ctx.setLineDash([]);
 
-    const tones = ["#4a5231", "#606345", "#414a32"];
+    const tones = ["#493238", "#5a3b42", "#3f2a30"];
     for (const dot of decorations) {
       ctx.fillStyle = tones[dot.tone];
       ctx.globalAlpha = .45;
@@ -348,7 +348,7 @@
     }
     ctx.globalAlpha = 1;
     drawObstacleDecorations();
-    ctx.fillStyle = "#697647";
+    ctx.fillStyle = "#a24a50";
     ctx.fillRect(6, 6, 7, 7);
     ctx.fillRect(WIDTH - 13, 6, 7, 7);
     ctx.fillRect(6, HEIGHT - 13, 7, 7);
@@ -358,29 +358,29 @@
   function drawObstacleDecorations() {
     for (const wall of obstacles) {
       if (wall.type === "crate") {
-        ctx.fillStyle = "#564c34";
+        ctx.fillStyle = "#583a38";
         ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
-        ctx.fillStyle = "#796444";
+        ctx.fillStyle = "#81514b";
         ctx.fillRect(wall.x + 2, wall.y + 2, wall.w - 4, 3);
-        ctx.fillStyle = "#36382a";
+        ctx.fillStyle = "#38292c";
         ctx.fillRect(wall.x + 3, wall.y + wall.h - 4, wall.w - 6, 2);
-        ctx.fillStyle = "#66583a";
+        ctx.fillStyle = "#70453f";
         ctx.fillRect(wall.x + 5, wall.y + 5, 2, Math.max(2, wall.h - 10));
         if (wall.w > 20) ctx.fillRect(wall.x + wall.w - 8, wall.y + 4, 2, wall.h - 8);
       } else if (wall.type === "sandbag") {
-        ctx.fillStyle = "#54503a";
+        ctx.fillStyle = "#51403c";
         ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
-        ctx.fillStyle = "#77714d";
+        ctx.fillStyle = "#76504a";
         for (let i = 2; i < wall.w - 2; i += 9) ctx.fillRect(wall.x + i, wall.y + 2, 6, 4);
-        ctx.fillStyle = "#3e4230";
+        ctx.fillStyle = "#392b2d";
         ctx.fillRect(wall.x + 2, wall.y + wall.h - 4, wall.w - 4, 2);
       } else {
-        ctx.fillStyle = "#484c39";
+        ctx.fillStyle = "#493638";
         ctx.fillRect(wall.x + 3, wall.y, wall.w - 6, wall.h);
         ctx.fillRect(wall.x, wall.y + 4, wall.w, wall.h - 8);
-        ctx.fillStyle = "#60644a";
+        ctx.fillStyle = "#654548";
         ctx.fillRect(wall.x + 5, wall.y + 4, 7, 4);
-        ctx.fillStyle = "#34392d";
+        ctx.fillStyle = "#38292d";
         ctx.fillRect(wall.x + wall.w - 8, wall.y + wall.h - 6, 4, 3);
       }
     }
@@ -389,9 +389,9 @@
   function drawTank(tank, enemy = false) {
     const x = Math.round(tank.x);
     const y = Math.round(tank.y);
-    const body = enemy ? "#bd6045" : "#b9d65c";
-    const bodyDark = enemy ? "#7d4037" : "#71833f";
-    const trim = enemy ? "#e68a5b" : "#e4ef90";
+    const body = enemy ? "#bd6045" : "#e6535b";
+    const bodyDark = enemy ? "#7d4037" : "#982f3b";
+    const trim = enemy ? "#e68a5b" : "#ff9b9d";
     ctx.save();
     ctx.translate(x, y);
     if (enemy && player && Math.hypot(player.x - x, player.y - y) < 70) {
@@ -401,10 +401,10 @@
       ctx.fill();
     }
     ctx.rotate(tank.angle);
-    ctx.fillStyle = "#182017";
+    ctx.fillStyle = "#211619";
     ctx.fillRect(-8, -9, 17, 4);
     ctx.fillRect(-8, 5, 17, 4);
-    ctx.fillStyle = enemy ? "#593b32" : "#465032";
+    ctx.fillStyle = enemy ? "#593b32" : "#642d35";
     for (let tx = -6; tx <= 5; tx += 5) {
       ctx.fillRect(tx, -8, 2, 2);
       ctx.fillRect(tx, 6, 2, 2);
@@ -420,16 +420,16 @@
     ctx.fillRect(-1, -3, 7, 6);
     ctx.fillStyle = body;
     ctx.fillRect(0, -2, 7, 4);
-    ctx.fillStyle = enemy ? "#d27751" : "#d8e989";
+    ctx.fillStyle = enemy ? "#d27751" : "#fa7378";
     ctx.fillRect(3, -1, 10, 2);
-    ctx.fillStyle = enemy ? "#f0ac6d" : "#f2f1bd";
+    ctx.fillStyle = enemy ? "#f0ac6d" : "#ffd0b5";
     ctx.fillRect(11, -1, 2, 2);
     ctx.restore();
 
     if (enemy && tank.health > 1) {
       ctx.fillStyle = "rgba(12,15,12,.8)";
       ctx.fillRect(x - 9, y - 14, 18, 3);
-      ctx.fillStyle = "#e78349";
+      ctx.fillStyle = "#f2545b";
       ctx.fillRect(x - 8, y - 13, 15, 1);
     }
   }
@@ -442,9 +442,9 @@
     if (player && (player.invulnerable <= 0 || Math.floor(elapsed * 12) % 2 === 0)) drawTank(player);
 
     for (const bullet of bullets) {
-      ctx.fillStyle = bullet.enemy ? "#ff9b6b" : "#f2e891";
+      ctx.fillStyle = bullet.enemy ? "#ff9b6b" : "#ffc0a8";
       ctx.fillRect(Math.round(bullet.x - 2), Math.round(bullet.y - 2), 4, 4);
-      ctx.fillStyle = bullet.enemy ? "rgba(255,119,76,.28)" : "rgba(255,237,131,.3)";
+      ctx.fillStyle = bullet.enemy ? "rgba(255,119,76,.28)" : "rgba(255,139,145,.35)";
       ctx.fillRect(Math.round(bullet.x - bullet.vx * .035), Math.round(bullet.y - bullet.vy * .035), 3, 3);
     }
     for (const p of particles) {
@@ -455,7 +455,7 @@
     ctx.globalAlpha = 1;
 
     if (state === "playing") {
-      ctx.strokeStyle = "rgba(231,239,144,.4)";
+      ctx.strokeStyle = "rgba(255,100,111,.55)";
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(pointer.x - 5, pointer.y);
