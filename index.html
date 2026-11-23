@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Game tank combat bergaya pixel-art. Bertahan dari gelombang musuh di Iron Front."
+    />
+    <title>Iron Front — Pixel Tank Combat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Iron Front beranda">
+          <span class="brand-mark" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </span>
+          <span>IRON<span class="brand-muted">FRONT</span></span>
+        </a>
+        <div class="topbar-right">
+          <span class="build-label">ARCADE SERIES <span>01</span></span>
+          <span class="status-pill"><span class="status-dot"></span> SYSTEM ONLINE</span>
+        </div>
+      </header>
+
+      <section class="intro">
+        <div class="eyebrow"><span class="eyebrow-line"></span> SINGLE PLAYER / SURVIVAL</div>
+        <h1>HOLD THE <span>LINE.</span></h1>
+        <p>Medan perang memanggil. Hadapi gelombang tank musuh dan pertahankan posisimu.</p>
+      </section>
+
+      <section class="game-layout" aria-label="Permainan Iron Front">
+        <aside class="mission-panel">
+          <div class="panel-heading">
+            <span class="section-index">01 / BRIEFING</span>
+            <span class="crosshair-icon" aria-hidden="true">⌖</span>
+          </div>
+
+          <div class="mission-title">
+            <span class="tiny-label">OPERATION</span>
+            <h2>Dust<br />Breaker</h2>
+            <p class="mission-location"><span class="location-dot"></span> SECTOR 07 — BADLANDS</p>
+          </div>
+
+          <div class="panel-divider"></div>
+
+          <div class="stat-block">
+            <span class="tiny-label">CURRENT SCORE</span>
+            <strong id="scoreValue">000000</strong>
+          </div>
+          <div class="stat-block">
+            <span class="tiny-label">WAVE</span>
+            <div class="wave-readout"><strong id="waveValue">01</strong><span> / INCOMING</span></div>
+          </div>
+          <div class="stat-block health-stat">
+            <span class="tiny-label">ARMOR INTEGRITY</span>
+            <div class="health-pips" id="healthPips" aria-label="3 dari 3 armor tersisa">
+              <span class="health-pip"></span><span class="health-pip"></span><span class="health-pip"></span>
+            </div>
+          </div>
+
+          <div class="panel-divider lower-divider"></div>
+          <div class="objective">
+            <span class="objective-icon" aria-hidden="true">✳</span>
+            <p><strong>OBJECTIVE</strong><br />Hancurkan semua tank musuh. Jangan biarkan mereka mengepungmu.</p>
+          </div>
+        </aside>
+
+        <div class="battle-column">
+          <div class="arena-frame">
+            <div class="arena-toolbar">
+              <div class="arena-label"><span class="live-dot"></span> LIVE FEED <span class="toolbar-separator">/</span> <span id="arenaState">STANDBY</span></div>
+              <div class="arena-coords">X: 04.82 <span>Y: 19.07</span></div>
+            </div>
+            <div class="canvas-wrap">
+              <canvas id="battlefield" width="960" height="600" aria-label="Arena tank combat pixel art"></canvas>
+              <div class="game-overlay" id="gameOverlay">
+                <div class="overlay-card">
+                  <span class="overlay-kicker" id="overlayKicker">YOUR MISSION STARTS NOW</span>
+                  <h2 id="overlayTitle">READY<br /><span>COMMANDER?</span></h2>
+                  <p id="overlayMessage">Hancurkan tank musuh. Bertahan selama mungkin.</p>
+                  <button class="primary-button" id="startButton" type="button">
+                    <span id="buttonText">MULAI MISI</span><span class="button-arrow" aria-hidden="true">↗</span>
+                  </button>
+                </div>
+              </div>
+              <div class="pause-indicator" id="pauseIndicator" hidden>⏸ &nbsp; PAUSED</div>
+            </div>
+            <div class="arena-footer">
+              <span><span class="footer-square"></span> TERRAIN: DRYLAND</span>
+              <span>THREAT LEVEL <strong id="threatValue">LOW</strong></span>
+              <span class="arena-version">IF-07 / V.1.0</span>
+            </div>
+          </div>
+
+          <div class="controls-bar">
+            <div class="controls-group">
+              <span class="controls-heading">CONTROLS</span>
+              <span class="key-cluster"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span>
+              <span class="control-caption">MOVE</span>
+              <span class="control-divider"></span>
+              <span class="mouse-icon" aria-hidden="true">◎</span>
+              <span class="control-caption">AIM</span>
+              <kbd class="space-key">SPACE</kbd>
+              <span class="control-caption">FIRE</span>
+            </div>
+            <button class="pause-button" id="pauseButton" type="button" aria-label="Jeda permainan" disabled>
+              <span aria-hidden="true">Ⅱ</span> <span id="pauseButtonText">PAUSE</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <span>BUILT FOR THE BATTLEFIELD <span class="footer-asterisk">✳</span></span>
+        <span>NO GLORY WITHOUT GRIT.</span>
+      </footer>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
